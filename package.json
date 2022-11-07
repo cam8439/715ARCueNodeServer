@@ -1,0 +1,15 @@
+{
+  "name": "arcue",
+  "version": "1.0.0",
+  "description": "Simple HTTP Server for AR Cue Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo 'Error: No test specified'"
+  },
+  "author": "cam8439@rit.edu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "luxon": "^3.1.0"
+  }
+}
