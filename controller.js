@@ -5,7 +5,7 @@ var synctime = '';
 
 module.exports.setSyncTime = function(req, res) {
    
-    var time = DateTime.now().plus({seconds: 30}).toString();
+    var time = DateTime.now().plus({seconds: 30}).toUnixInteger().toString();
     synctime = time;
 
     try{
