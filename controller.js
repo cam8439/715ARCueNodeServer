@@ -9,7 +9,7 @@ module.exports.setSyncTime = function(req, res) {
     synctime = time;
 
     try{
-        fs.writeFile("syncTime.txt", time, (err) => {
+        fs.writeFile("www/Public/syncTime.txt", time, (err) => {
             if (err) throw err;
             console.log("Completed!");
          });
