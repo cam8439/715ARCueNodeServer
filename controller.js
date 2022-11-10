@@ -10,7 +10,7 @@ module.exports.setSyncTime = function(req, res) {
     synctime = String(time - offset);
 
     try{
-        fs.writeFile("../public_html/syncTime.txt", time, (err) => {
+        fs.writeFile("../public_html/syncTime.txt", synctime, (err) => {
             if (err) throw err;
             console.log("Completed!");
          });
