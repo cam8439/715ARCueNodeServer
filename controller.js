@@ -29,10 +29,10 @@ module.exports.setSyncTime = function(req, res) {
 
 module.exports.clearSyncTime = function(req, res) {
 
-    synctime = ''
+    synctime = '-1'
 
     try{
-        fs.writeFile("../public_html/syncTime.txt", '', (err) => {
+        fs.writeFile("../public_html/syncTime.txt", '-1', (err) => {
             if (err) throw err;
             console.log("Completed!");
          });
@@ -46,7 +46,7 @@ module.exports.clearSyncTime = function(req, res) {
     }
     res.status(200).send({
         success: true,
-        message: `Cleared sync timeßß`
+        message: `Cleared sync time`
     })
 }
 
