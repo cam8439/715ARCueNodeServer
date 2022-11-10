@@ -7,6 +7,10 @@ if (functions.setSyncTime) {
     router.post('/', functions.setSyncTime)
 }
 
+if (functions.clearSyncTime) {
+    router.post('/clear', functions.clearSyncTime)
+}
+
 if (functions.getSyncTimeFile) {
     router.get('/file', functions.getSyncTimeFile)
 }
