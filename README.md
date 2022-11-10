@@ -2,24 +2,23 @@
 
 ## How to Run:
 
-* Make sure you have [Node](https://nodejs.org/en/download/) and [Nodemon](https://www.npmjs.com/package/nodemon) on your machine
+* These instructions specific to RIT CS machines. To run locally, please see main branch.
 
-1. Clone the project
+1. Clone the project, navigate to the directory you cloned to
 
-2. From the project directory, run the command `npm install`. This should automatically install all required modules.
-
-3. To start the project, run the command `nodemon`. You should see a confirmation message in the console.
+2. To start the project, run the command `node app.js`. You should see a confirmation message in the console.
 
 ## Testing
 
 You can use any HTTP client to test. I prefer [Postman](https://www.postman.com/). 
 
-The target URL, if running the project locally, should be `[Your IP Address]:3000/`
+The target URL should be `[ritUsername]@[hostname].cs.rit.edu:3000/`
 
 ## Current Active requests:
 
 | Method | URL   | Effect                                     |
 |--------|-------|--------------------------------------------|
 | POST   | /     | Sets Sync Time to local variable and file  |
+| POST   | /     | Resets Sync Time to -1                     |
 | GET    | /     | Reads Sync Time from local variable        |
 | GET    | /file | Reads Sync Time from the file syncTime.txt |
