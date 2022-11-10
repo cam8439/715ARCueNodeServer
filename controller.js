@@ -5,8 +5,9 @@ var synctime = '';
 
 module.exports.setSyncTime = function(req, res) {
    
-    var time = DateTime.now().plus({seconds: 30}).toUnixInteger().toString();
-    synctime = time;
+    var time = DateTime.now().plus({seconds: 30}).toUnixInteger();
+    var offset = DateTime.now().set({hour: 0, minute: 0, second: 0}).toUnixInteger(); 
+    synctime = String(time - offset);
 
     try{
         fs.writeFile("../public_html/syncTime.txt", time, (err) => {
@@ -20,10 +21,11 @@ module.exports.setSyncTime = function(req, res) {
             success: false,
             message: "Error occurred updating sync time"
         })
+        return
     }
     res.status(200).send({
         success: true,
-        message: `Updated sync time to ${time}`
+        message: `Updated sync time to ${synctime}`
     })
 }
 
