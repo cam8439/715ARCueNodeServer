@@ -28,9 +28,8 @@ module.exports.setSyncTime = function(req, res) {
 }
 
 module.exports.clearSyncTime = function(req, res) {
-   
-    var time = DateTime.now().plus({seconds: 30}).toUnixInteger().toString();
-    synctime = time;
+
+    synctime = ''
 
     try{
         fs.writeFile("../public_html/syncTime.txt", '', (err) => {
@@ -47,7 +46,7 @@ module.exports.clearSyncTime = function(req, res) {
     }
     res.status(200).send({
         success: true,
-        message: `Updated sync time to ${time}`
+        message: `Cleared sync timeßß`
     })
 }
 
