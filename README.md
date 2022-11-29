@@ -1,6 +1,7 @@
 # 715ARCueNodeServer
 
 **Important: If you are using the RIT CS Machines, refer to the README.md on the NodeModules branch instead of this one**
+(There are also more comments there)
 
 ## Implementation Details:
 This project uses the following techstack
