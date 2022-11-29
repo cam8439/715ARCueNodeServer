@@ -1,8 +1,16 @@
+// Claire Murray
+
+// required modules
 const { DateTime } = require('luxon');
 const fs = require("fs");
 
-var synctime = '';
+// This string will hold our syncronization timestamp
+var synctime = '-1';
 
+// setSyncTime
+// This is a POST request that updates the syncronization time
+// @param: req - HTTP Request object
+// @param: res - HTTP Response object
 module.exports.setSyncTime = function(req, res) {
    
     var time = DateTime.now().plus({seconds: 30}).toMillis();
@@ -10,6 +18,8 @@ module.exports.setSyncTime = function(req, res) {
     synctime = String(time - offset);
 
     try{
+
+        // This is slightly buggy I think? It's fixed on the other branch
         fs.writeFile("../public_html/syncTime.txt", synctime, (err) => {
             if (err) throw err;
             console.log("Completed!");
@@ -29,6 +39,10 @@ module.exports.setSyncTime = function(req, res) {
     })
 }
 
+// clearSyncTime
+// This is a POST request that resets the syncronization time
+// @param: req - HTTP Request object
+// @param: res - HTTP Response object
 module.exports.clearSyncTime = function(req, res) {
 
     synctime = '-1'
@@ -52,6 +66,10 @@ module.exports.clearSyncTime = function(req, res) {
     })
 }
 
+// getSyncTimeFile
+// This is a GET request that retrieves the syncronization time
+// @param: req - HTTP Request object
+// @param: res - HTTP Response object
 module.exports.getSyncTimeFile = function(req, res) {
     try{
         fs.readFile("syncTime.txt", (err, data) => {
@@ -71,9 +89,10 @@ module.exports.getSyncTimeFile = function(req, res) {
     }
 }
 
+// getSyncTimeLocal
+// This is a GET request that retrives the syncronization time
+// @param: req - HTTP Request object
+// @param: res - HTTP Response object
 module.exports.getSyncTimeLocal = function(req, res) {
-    res.status(200).send({
-        success: true,
-        data: synctime
-    })
+    res.status(200).send(synctime);
 }
