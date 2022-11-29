@@ -1,5 +1,11 @@
 # 715ARCueNodeServer
 
+## Implementation Details:
+This project uses the following techstack
+- Language: JavaScript
+- Node.js and NPM
+- Express JS
+
 ## How to Run:
 
 * Make sure you have [Node](https://nodejs.org/en/download/) and [Nodemon](https://www.npmjs.com/package/nodemon) on your machine
@@ -22,4 +28,6 @@ The target URL, if running the project locally, should be `[Your IP Address]:300
 |--------|-------|--------------------------------------------|
 | POST   | /     | Sets Sync Time to local variable and file  |
 | GET    | /     | Reads Sync Time from local variable        |
-| GET    | /file | Reads Sync Time from the file syncTime.txt |
+| GET    | /file | Reads Sync Time from the file syncTime.txt |  
+
+Note: *( GET /file is currently buggy, but you can still access the file directly.)*
