@@ -10,7 +10,7 @@ var synctime = '-1';
 var lv = '1';
 
 // setSyncTime
-// This is a POST request that updates the syncronization time
+// This is a POST request that updates the syncronization time, level index, 
 // @param: req - HTTP Request object
 // @param: res - HTTP Response object
 module.exports.setSyncTime = function(req, res) {
@@ -19,12 +19,21 @@ module.exports.setSyncTime = function(req, res) {
     var offset = DateTime.now().set({hour: 0, minute: 0, second: 0}).toMillis(); 
     synctime = String(time - offset);
 
-    try{
-        // fs.writeFile("../public_html/syncTime.txt", synctime, (err) => {
-        //     if (err) throw err;
-        //     console.log("Completed!");
-        //  });
+    // Data from HTTP request object
+    const flag = req.body.flag;
+    const device_id = req.body.device_id;
+    const level = req.body.level;
+    const level_start_time = req.body.level_start_time;
 
+    lv = level;
+
+    var file_text = flag + "," + device_id + "," + synctime + "," + level + "," + level_start_time;
+
+    try{
+        fs.writeFile("../public_html/syncTime.txt", file_text, (err) => {
+            if (err) throw err;
+            console.log("Completed!");
+         });
     } catch (e) {
         console.log(e);
         res.status(500).send({
@@ -36,73 +45,6 @@ module.exports.setSyncTime = function(req, res) {
     res.status(200).send({
         success: true,
         message: `Updated sync time to ${synctime}`
-    })
-}
-
-// setSyncTimeWithOffset
-// This is a POST request that updates the syncronization time and tells the
-// sequencer to start a given number of seconds into the sequence
-// @param: req - HTTP Request object
-// @param: res - HTTP Response object
-module.exports.setSyncTimeWithOffset = function(req, res) {
-
-    // Make sure to send the start timecode in seconds!
-    var seconds = req.body.startAt;
-    if(!seconds) seconds = '0';
-   
-    var time = DateTime.now().plus({seconds: 5}).toMillis();
-    var offset = DateTime.now().set({hour: 0, minute: 0, second: 0}).toMillis(); 
-    synctime = String(time - offset);
-
-    // we will append the timecode to start at on a new line of the file.
-    synctime += '\n' + seconds;
-
-    try{
-        // I think this was buggy on RIT CS machines, but there sh
-        // fs.writeFile("../public_html/syncTime.txt", synctime, (err) => {
-        //     if (err) throw err;
-        //     console.log("Completed!");
-        //  });
-
-    } catch (e) {
-        console.log(e);
-        res.status(500).send({
-            success: false,
-            message: "Error occurred updating sync time"
-        })
-        return
-    }
-    res.status(200).send({
-        success: true,
-        message: `Updated sync time to ${synctime}`
-    })
-}
-
-// setLevelSync
-// This is a POST request that updates the level index
-// @param: req - HTTP Request object
-// @param: res - HTTP Response object
-module.exports.setLevelSync = function(req, res) {
-   
-    lv = req.body.level;
-
-    try{
-        // fs.writeFile("../public_html/level.txt", lv , (err) => {
-        //     if (err) throw err;
-        //     console.log("Completed!");
-        //  });
-
-    } catch (e) {
-        console.log(e);
-        res.status(500).send({
-            success: false,
-            message: "Error occurred updating level"
-        })
-        return
-    }
-    res.status(200).send({
-        success: true,
-        message: `Set to synchronize to level ${lv}`
     })
 }
 
@@ -112,7 +54,7 @@ module.exports.setLevelSync = function(req, res) {
 // @param: res - HTTP Response object
 module.exports.clearSyncTime = function(req, res) {
 
-    synctime = '-1'
+    synctime = '-1';
 
     try{
         fs.writeFile("../public_html/syncTime.txt", '-1', (err) => {
@@ -132,7 +74,6 @@ module.exports.clearSyncTime = function(req, res) {
         message: `Cleared sync time`
     })
 }
-
 
 // getSyncTimeLocal
 // This is a GET request that retrives the syncronization time
