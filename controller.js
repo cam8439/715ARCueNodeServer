@@ -57,7 +57,7 @@ module.exports.clearSyncTime = function(req, res) {
     synctime = '-1';
 
     try{
-        fs.writeFile("../public_html/syncTime.txt", '-1', (err) => {
+        fs.writeFile("../public_html/syncTime.txt", '-1,-1,-1,-1,0:00', (err) => {
             if (err) throw err;
             console.log("Completed!");
          });
